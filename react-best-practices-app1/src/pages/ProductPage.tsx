@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
+import ProductListView from "../components/product/ProductListView";
 
+// Container component
 const ProductPage = () => {
   const [product, setProduct] = useState<[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,19 +25,15 @@ const ProductPage = () => {
     }
   };
 
-  if (isLoading) return <div>กำลังโหลด......</div>
-  if (error) return <div style={{color : 'red'}}>{error?.message}</div>
+  if (isLoading) return <div>กำลังโหลด......</div>;
+  if (error) return <div style={{ color: "red" }}>{error?.message}</div>;
 
   return (
     <div>
       <h1>ProductPage</h1>
-      <div>
-        {
-          product?.map((item: any) => {
-            return <p key={item.id}>{item.id} - {item.title}</p>
-          })
-        }
-      </div>
+
+      <ProductListView product={product!} /> 
+
       <NavLink to="/">Back..</NavLink>
     </div>
   );
